@@ -1,0 +1,26 @@
+{
+    "name": "ruysu/laravel-form",
+    "description": "",
+    "authors": [
+        {
+            "name": "Gerardo Gómez",
+            "email": "code@gerardo.im"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*",
+        "illuminate/html": "4.2.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.1.*",
+        "mockery/mockery": "0.9.*",
+        "orchestra/testbench": "2.2.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ruysu\\LaravelForm\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
