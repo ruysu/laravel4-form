@@ -35,17 +35,30 @@ class BootstrapRenderer implements RendererInterface
      */
     public function renderField(FieldCollection $fields, $name, $value = null, array $attributes = array())
     {
-        if (!isset($attributes['class'])) {
+        $field = $fields->get($name);
+
+        if (!isset($attributes['class']) && !array_key_exists('class', $field->getAttributes())) {
             $attributes['class'] = '';
         }
 
-        $attributes['class'] = trim('form-control ' . $attributes['class']);
-
-        $field = $fields->get($name);
+        $type = $field->getType();
         $id = $fields->getFieldId($field, $attributes);
-        $label = $fields->getLabelFor($field, $id, ['class' => 'control-label']);
-        $error = $fields->getErrorFor($field, $id, ['class' => 'help-block']);
+
+        if (!in_array($type, ['file', 'checkbox', 'radio', 'button', 'submit', 'image'])) {
+            $attributes['class'] = trim('form-control ' . $attributes['class']);
+        }
+
         $input = $fields->getInputFor($field, $value, $attributes);
+
+        if (in_array($type, ['checkbox', 'radio'])) {
+            $checkable_label = e($field->getLabel());
+            $input = "<div class=\"{$type}\"><label>{$input} {$checkable_label}</label></div>";
+            $label = '';
+        } else {
+            $label = $fields->getLabelFor($field, $id, ['class' => 'control-label']);
+        }
+
+        $error = $fields->getErrorFor($field, $id, ['class' => 'help-block']);
         $has_error = ($error ? ' has-error' : '');
 
         return "<div class=\"form-group{$has_error}\" id=\"{$id}-group\">{$label}{$input}{$error}</div>";

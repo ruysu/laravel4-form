@@ -101,6 +101,8 @@ abstract class FormBuilder
      */
     public function formFor($action = null, $merge = null)
     {
+        $this->resetFields();
+
         if ($action) {
             $method = camel_case("add_{$action}_fields");
 
@@ -357,13 +359,13 @@ abstract class FormBuilder
      *
      * @return string
      */
-    public function render($action, array $attributes = array())
+    public function render($action = null, array $attributes = array())
     {
         $renderer = $this->getRenderer();
 
         $html = $this->open($action, $attributes);
 
-        $html .= $renderer->render($this->formFor($action)->getFields());
+        $html .= $renderer->render($this->getFields());
 
         $html .= $this->builder->close();
 
