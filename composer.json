@@ -1,6 +1,5 @@
 {
     "name": "ruysu/laravel4-form",
-    "replace": {"ruysu/laravel-form": "self.version"},
     "description": "Programatically add fields to a form and then render it",
     "keywords": [ "laravel-4", "form", "html", "helper" ],
     "homepage": "https://github.com/ruysu/laravel4-form",
